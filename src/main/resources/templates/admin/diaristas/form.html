@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html th:replace="~{admin/layout :: template(~{:: main})}">
+<body>
+  <main>
+    <h2 style="margin-top: 20px">Cadastro diarista</h2>
+    <hr />
+    <form method="POST" th:object="${diarista}" id="form" enctype="multipart/form-data">
+      <div class="row">
+        <div class="mb-3 col-md-6">
+          <label class="form-label" for="nome">Nome Completo</label>
+          <input class="form-control" type="text" id="nome" th:field="*{nomeCompleto}" />
+
+          <div class="alert alert-danger" role="alert" 
+            th:if="${#fields.hasErrors('nomeCompleto')}">
+          <label th:errors="*{nomeCompleto}" class="validation-message"></label>
+        </div>
+      </div>
+
+      <div class="mb-3 col-md-6">
+        <label class="form-label" for="cpf">CPF</label>
+        <input class="form-control" type="text" id="cpf" th:field="*{cpf}" 
+          data-mask="000.000.000-00" />
+
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('cpf')}">
+          <label th:errors="*{cpf}" class="validation-message"></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="mb-3 col-md-6">
+        <label class="form-label" for="email">E-mail</label>
+        <input class="form-control" type="email" id="email" th:field="*{email}" />
+
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('email')}">
+          <label th:errors="*{email}" class="validation-message"></label>
+        </div>
+      </div>
+
+      <div class="mb-3 col-md-6">
+        <label class="form-label" for="tel">Telefone</label>
+        <input class="form-control" type="text" id="tel" th:field="*{telefone}" 
+          data-mask="(00) 00000-0000" />
+
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('telefone')}">
+          <label th:errors="*{telefone}" class="validation-message"></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="mb-3 col-md-3">
+        <label class="form-label" for="cep">CEP</label>
+        <input class="form-control" type="text" id="cep" th:field="*{cep}" data-mask="00000-000"
+          onblur="pesquisacep(this.value)" />
+      </div>
+
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('cep')}">
+        <label th:errors="*{cep}" class="validation-message"></label>
+      </div>
+
+      <div class="mb-3 col-md-6">
+        <label class="form-label" for="logradouro">Logradouro</label>
+        <input class="form-control" type="text" id="logradouro" th:field="*{logradouro}" />
+      </div>
+
+      <div class="mb-3 col-md-3">
+        <label class="form-label" for="num">Número</label>
+        <input class="form-control" type="text" id="num" th:field="*{numero}" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="mb-3 col-md-6">
+        <label class="form-label" for="bairro">Bairro</label>
+        <input class="form-control" type="text" id="bairro" th:field="*{bairro}" />
+      </div>
+
+      <div class="mb-3 col-md-6">
+        <label class="form-label" for="cidade">Cidade</label>
+        <input class="form-control" type="text" id="cidade" th:field="*{cidade}" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="mb-3 col-md-3">
+        <label class="form-label" for="complemento">Complemento</label>
+        <input class="form-control" type="text" id="complemento" th:field="*{complemento}" />
+      </div>
+
+      <div class="mb-3 col-md-3">
+        <label class="form-label" for="uf">Estado</label>
+        <input class="form-control" type="text" id="uf" th:field="*{estado}" />
+      </div>
+
+      <div class="mb-3 col-md-6">
+        <label class="form-label" for="foto">
+          Foto <small>(opcional)</small>
+        </label>
+        <input class="form-control" type="file" id="foto" name="imagem" style="border: none" />
+      </div>
+    </div>
+
+    <button class="btn btn-success" type="submit" style="width: 140px">
+      Salvar
+    </button>
+    <a href="/admin/diaristas" class="btn btn-default" 
+      style="width: 140px; border: 1px solid #ccc">Cancelar</a>
+  </form>
+</main>
+</body>
+</html>
